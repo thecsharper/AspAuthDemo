@@ -1,2 +1,4 @@
 # Securing ASP.NET Core 6 with OAuth2 and OpenID Connect
-Fully functioning finished sample code for my Securing ASP.NET Core 6 with OAuth2 and OpenID Connect course
+Copy for testing of https://github.com/KevinDockx/SecuringAspNetCore6WithOAuth2AndOIDC
+
+Will upgrade to latest netcore and make improvements
