@@ -1,6 +1,6 @@
 ﻿using Duende.IdentityServer.EntityFramework.DbContexts;
 using Duende.IdentityServer.EntityFramework.Mappers;
-using Microsoft.EntityFrameworkCore;
+
 using Serilog;
 
 namespace Marvin.IDP
@@ -9,13 +9,10 @@ namespace Marvin.IDP
     {
         public static void EnsureSeedData(WebApplication app)
         {
-            using (var scope = app.Services
-                .GetRequiredService<IServiceScopeFactory>().CreateScope())
-            {
-                var context = scope.ServiceProvider
-                    .GetService<ConfigurationDbContext>();
-                EnsureSeedData(context);
-            }
+            using var scope = app.Services.GetRequiredService<IServiceScopeFactory>().CreateScope();
+            var context = scope.ServiceProvider
+                .GetService<ConfigurationDbContext>();
+            EnsureSeedData(context);
         }
 
 

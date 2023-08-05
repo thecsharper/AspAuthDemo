@@ -1,8 +1,10 @@
-﻿using AutoMapper;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
+
+using AutoMapper;
+
 using ImageGallery.API.Services;
 using ImageGallery.Model;
-using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Mvc;
 
 namespace ImageGallery.API.Controllers
 {
@@ -81,7 +83,7 @@ namespace ImageGallery.API.Controllers
             var webRootPath = _hostingEnvironment.WebRootPath;
 
             // create the filename
-            string fileName = Guid.NewGuid().ToString() + ".jpg";
+            var fileName = Guid.NewGuid().ToString() + ".jpg";
             
             // the full file path
             var filePath = Path.Combine($"{webRootPath}/images/{fileName}");
@@ -104,7 +106,6 @@ namespace ImageGallery.API.Controllers
                 throw new Exception("User identifier is missing from token.");
             }
             imageEntity.OwnerId = ownerId;
-
 
             // add and save.  
             _galleryRepository.AddImage(imageEntity);

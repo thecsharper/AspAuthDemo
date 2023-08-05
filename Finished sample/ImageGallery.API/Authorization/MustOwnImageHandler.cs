@@ -33,8 +33,7 @@ namespace ImageGallery.API.Authorization
             }
 
             // get the sub claim
-            var ownerId = context.User
-                .Claims.FirstOrDefault(c => c.Type == "sub")?.Value;
+            var ownerId = context.User.Claims.FirstOrDefault(c => c.Type == "sub")?.Value;
             // if it cannot be found, the handler fails 
             if (ownerId == null)
             {
@@ -42,8 +41,7 @@ namespace ImageGallery.API.Authorization
                 return;
             }
 
-            if (!await _galleryRepository
-                .IsImageOwnerAsync(imageIdAsGuid, ownerId))
+            if (!await _galleryRepository.IsImageOwnerAsync(imageIdAsGuid, ownerId))
             {
                 context.Fail();
                 return;
