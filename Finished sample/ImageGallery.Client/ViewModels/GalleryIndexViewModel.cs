@@ -1,6 +1,4 @@
-﻿using ImageGallery.Client.Controllers;
-using ImageGallery.Model;
-using System.Collections.Generic;
+﻿using ImageGallery.Model;
 
 namespace ImageGallery.Client.ViewModels
 {
