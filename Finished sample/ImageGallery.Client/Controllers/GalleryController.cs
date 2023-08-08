@@ -1,11 +1,14 @@
-﻿using ImageGallery.Client.ViewModels;
-using ImageGallery.Model;
+﻿using System.Text;
+using System.Text.Json;
+
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.IdentityModel.Protocols.OpenIdConnect;
-using System.Text;
-using System.Text.Json;
+
+using ImageGallery.Client.ViewModels;
+using ImageGallery.Model;
+
 
 namespace ImageGallery.Client.Controllers
 {
