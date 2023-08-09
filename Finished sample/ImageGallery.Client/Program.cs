@@ -1,9 +1,11 @@
-using ImageGallery.Authorization;
+using System.IdentityModel.Tokens.Jwt;
+
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Authentication.OpenIdConnect;
 using Microsoft.Net.Http.Headers;
-using System.IdentityModel.Tokens.Jwt;
+
+using ImageGallery.Authorization;
 
 var builder = WebApplication.CreateBuilder(args);
 
