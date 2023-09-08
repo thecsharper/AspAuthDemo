@@ -15,7 +15,6 @@ namespace Marvin.IDP
             EnsureSeedData(context);
         }
 
-
         private static void EnsureSeedData(ConfigurationDbContext context)
         {
             if (!context.Clients.Any())

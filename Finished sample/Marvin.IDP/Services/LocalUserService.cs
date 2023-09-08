@@ -1,9 +1,11 @@
-﻿using Marvin.IDP.DbContexts;
-using Marvin.IDP.Entities;
+﻿using System.Security.Claims;
+using System.Security.Cryptography;
+
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
-using System.Security.Claims;
-using System.Security.Cryptography;
+
+using Marvin.IDP.DbContexts;
+using Marvin.IDP.Entities;
 
 namespace Marvin.IDP.Services
 {
@@ -16,9 +18,9 @@ namespace Marvin.IDP.Services
             IdentityDbContext context,
             IPasswordHasher<User> passwordHasher)
         {
-            _context = context ?? 
+            _context = context ??
                 throw new ArgumentNullException(nameof(context));
-            _passwordHasher = passwordHasher ?? 
+            _passwordHasher = passwordHasher ??
                 throw new ArgumentNullException(nameof(passwordHasher));
         }
 
@@ -122,7 +124,7 @@ namespace Marvin.IDP.Services
             });
         }
 
-        public async Task<bool> AddUserSecret(string subject, 
+        public async Task<bool> AddUserSecret(string subject,
             string name, string secret)
         {
             if (string.IsNullOrWhiteSpace(subject))
@@ -147,8 +149,8 @@ namespace Marvin.IDP.Services
                 return false;
             }
 
-            user.Secrets.Add(new UserSecret() 
-                { Name = name, Secret = secret });
+            user.Secrets.Add(new UserSecret()
+            { Name = name, Secret = secret });
             return true;
         }
 
@@ -209,11 +211,10 @@ namespace Marvin.IDP.Services
 
             // Validate credentials
             // return (user.Password == password);
-            var verificationResult = 
+            var verificationResult =
                 _passwordHasher.VerifyHashedPassword(
                     user, user.Password, password);
             return (verificationResult == PasswordVerificationResult.Success);
-
         }
 
         public async Task<User> GetUserByUserNameAsync(string userName)
@@ -234,7 +235,7 @@ namespace Marvin.IDP.Services
                 throw new ArgumentNullException(nameof(subject));
             }
 
-            return await _context.UserClaims.Where(u => 
+            return await _context.UserClaims.Where(u =>
                 u.User.Subject == subject).ToListAsync();
         }
 
@@ -245,7 +246,7 @@ namespace Marvin.IDP.Services
                 throw new ArgumentNullException(nameof(subject));
             }
 
-            return await _context.Users.FirstOrDefaultAsync(u => 
+            return await _context.Users.FirstOrDefaultAsync(u =>
                 u.Subject == subject);
         }
 
@@ -273,8 +274,7 @@ namespace Marvin.IDP.Services
             userToAdd.SecurityCodeExpirationDate = DateTime.UtcNow.AddHours(1);
 
             // hash & salt the password
-            userToAdd.Password = 
-                _passwordHasher.HashPassword(userToAdd, password);
+            userToAdd.Password = _passwordHasher.HashPassword(userToAdd, password);
 
             _context.Users.Add(userToAdd);
         }
